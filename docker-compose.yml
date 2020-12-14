@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  nominatim-api:
+    container_name: nominatim-api
+    build: ./api
+    ports:
+      - "8080:8080"
+    command: /bin/sh /app/startapache.sh
+    volumes:
+      - ${PWD}/api/local.php:/app/src/build/settings/local.php
+
+networks:
+  default:
+    external:
+      name: nominatim_docker
+
+volumes:
+  nominatim_data:
